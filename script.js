@@ -1,11 +1,11 @@
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
-      x.className += " responsive";
+        x.className += " responsive";
     } else {
-      x.className = "topnav";
+        x.className = "topnav";
     }
-  }
+}
 
 document.getElementById('isbnForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -20,16 +20,24 @@ document.getElementById('clearButton').addEventListener('click', function() {
     document.getElementById('isbn').value = '';
     document.getElementById('result').textContent = '';
     document.getElementById('loading').style.display = 'none';
+    document.getElementById('search').disabled = true;
+});
+
+document.getElementById('search').addEventListener('click', function() {
+    const isbnInput = document.getElementById('isbn').value;
+    searchOnline(isbnInput);
 });
 
 function validateISBN() {
     const isbnInput = document.getElementById('isbn').value;
     const resultElement = document.getElementById('result');
     const loadingElement = document.getElementById('loading');
+    const search = document.getElementById('search');
 
     if (isbnInput === '') {
         resultElement.textContent = '';
         loadingElement.style.display = 'none';
+        search.disabled = true;
         return;
     }
 
@@ -39,9 +47,11 @@ function validateISBN() {
         if (isValidISBN(isbnInput)) {
             resultElement.textContent = 'Valid ISBN';
             resultElement.style.color = 'green';
+            search.disabled = false;
         } else {
             resultElement.textContent = 'Invalid ISBN';
             resultElement.style.color = 'red';
+            search.disabled = true;
         }
         loadingElement.style.display = 'none';
     }, 500);
@@ -104,3 +114,10 @@ function isValidISBN13(isbn) {
     return sum % 10 === 0;
 }
 
+function searchOnline(isbn) {
+    if (isValidISBN(isbn)) {
+        isbn = isbn.replace(/[-\s]/g, '');
+        const searchURL = `https://www.google.com/search?&tbm=bks&q=isbn:${isbn}`;
+        window.open(searchURL, '_blank');
+    }
+}
