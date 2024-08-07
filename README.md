@@ -6,4 +6,4 @@ ISBN Validator - Web Development Project
 - **Shiven Kaushik** - 22BCE10401
 - **Aditya Mayur Sarwate** - 22BCE10907
 - **Vikas Pathak** - 22BCE11079
-- **Akshat Gupta** - 22BCE11080
+- **Akshat Gupta** - 22BCE10849
