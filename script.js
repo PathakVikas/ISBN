@@ -99,6 +99,7 @@ function validateISBN() {
 }
 
 function searchOnline(isbn) {
-    const url = `https://www.google.com/search?q=${isbn}`;
+    isbn = isbn.replace(/-/g, '');
+    const url = `https://www.google.com/search?&tbm=bks&q=isbn:${isbn}`;
     window.open(url, '_blank');
 }
